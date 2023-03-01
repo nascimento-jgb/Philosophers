@@ -6,25 +6,39 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:22:24 by jonascim          #+#    #+#             */
-/*   Updated: 2023/02/11 16:27:59 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/01 14:07:52 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
+#include "philo.h"
 
-Your(s) program(s) should take the following arguments:
-number_of_philosophers()
-time_to_die()
-time_to_eat()
-time_to_sleep()
-number_of_times_each_philosopher_must_eat()
+//gcc -g -pthread program.c
 
-◦ number_of_philosophers: The number of philosophers and also the number of forks.
-◦ time_to_die (in milliseconds): If a philosopher didn’t start eating time_to_die milliseconds since the beginning of their last meal or the beginning of the sim- ulation, they die.
-◦ time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
-◦ time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
-◦ number_of_times_each_philosopher_must_eat (optional argument): If all philosophers have eaten at least number_of_times_each_philosopher_must_eat times, the simulation stops. If not specified, the simulation stops when a philosopher dies.
-• Each philosopher has a number ranging from 1 to number_of_philosophers.
-• Philosopher number 1 sits next to philosopher number number_of_philosophers. Any other philosopher number N sits between philosopher number N - 1 and philosopher number N + 1.
+// A normal C function that is executed as a thread
+// when its name is specified in pthread_create()
 
-*/
+
+int	main(int argc, char **argv)
+{
+	t_helper	*data;
+	t_philo		*philo;
+	pthread_t	t_general;
+
+	if (argc != 6)
+		exit_message("Input error", 1);
+	data = (t_helper *)malloc(sizeof(t_helper));
+	if (!data)
+		exit_message("Allocation error", 1);
+	param_init(data, argv);
+	philo = (t_philo *)malloc(sizeof(t_philo) * data->num_philosophers);
+	if (!philo)
+		exit_message("Allocation error", 1);
+	philo_init(data, philo);
+	t_general = (pthread_t *)malloc(sizeof(pthread_t) * data->num_philosophers);
+	if (!t_general)
+		exit_message("Allocation error", 1);
+	threads_creation(t_general, data, philo);
+	exec_routine(data, philo);
+	free(t_general);
+	return (0);
+}
