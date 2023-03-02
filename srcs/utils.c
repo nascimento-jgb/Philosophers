@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:02:57 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/01 14:12:45 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:30:00 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	ft_atoi(char *str)
 {
@@ -19,12 +19,12 @@ int	ft_atoi(char *str)
 
 	sign = 1;
 	res = 0;
-	while (*str == ' ' || (*str >= 9 & *str <= 13))
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
 	if (*str == '-' || *str == '+')
 		if (*str++ == '-')
 			sign = -1;
-	while (*str >= '0' && *str <= 9)
+	while (*str >= '0' && *str <= '9')
 		res = (res * 10) + *str++ - '0';
 	return (res * sign);
 }
@@ -44,7 +44,7 @@ void	exit_message(char *str, int flag)
 
 unsigned long	real_time(t_philo *philo)
 {
-	return (get_time() - philo->get_data->time);
+	return (get_time() - philo->ref->time);
 }
 
 void	destroy_mutex(t_philo *philo)
@@ -52,6 +52,6 @@ void	destroy_mutex(t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (i < philo->get_data->num_philosophers)
+	while (i < philo->ref->num_philo)
 		pthread_mutex_destroy(&philo->mutex[i++]);
 }

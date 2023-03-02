@@ -6,29 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:16 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/01 13:00:36 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:29:34 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-static void	free_param(t_helper *data)
-{
-	if (data->num_philosophers)
-	{
-		free(data->num_philosophers);
-		free(data->num_forks);
-	}
-	if (data->time_to_die)
-		free(data->time_to_die);
-	if (data->time_to_eat)
-		free(data->time_to_eat);
-	if (data->time_to_sleep)
-		free(data->time_to_sleep);
-	if (data->num_philo_must_eat)
-		free(data->num_philo_must_eat);
-	free(data);
-}
+#include "../includes/philo.h"
 
 unsigned long	get_time(void)
 {
@@ -46,13 +28,23 @@ unsigned long	get_time(void)
 
 static int	param_atribution(t_helper *data, char **argv)
 {
-	data->num_philosophers = ft_atoi(argv[1]);
-	data->num_forks = data->num_philosophers;
+	printf("%s num philo\n", argv[1]);
+	printf("%s time to die\n", argv[2]);
+	printf("%s time to eat\n", argv[3]);
+	printf("%s time to sleep\n", argv[4]);
+	printf("%s must eat\n", argv[5]);
+	data->completed_meals = 0;
 	data->time = get_time();
+	data->num_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	if (data->num_philosophers < 1 || data->time_to_die < 1
+	printf("%lu time\n", data->time);
+	printf("%d num philo\n", data->num_philo);
+	printf("%d time to die\n", data->time_to_die);
+	printf("%d time to eat\n", data->time_to_eat);
+	printf("%d time to sleep\n", data->time_to_sleep);
+	if (data->num_philo < 1 || data->time_to_die < 1
 		|| data->time_to_eat < 1 || data->time_to_sleep < 1)
 		return (0);
 	if (argv[5])
@@ -60,6 +52,7 @@ static int	param_atribution(t_helper *data, char **argv)
 		data->num_philo_must_eat = ft_atoi(argv[5]);
 		if (data->num_philo_must_eat < 1)
 			return (0);
+		printf("%d must eat\n", data->num_philo_must_eat);
 	}
 	else
 		data->num_philo_must_eat = -1;
@@ -76,21 +69,27 @@ static int	param_check(char **argv)
 	{
 		j = 0;
 		while (argv[i][j])
-			if (!ft_isdigit(argv[i][j++]))
-				return (0);
+			if (ft_isdigit(argv[i][j++]))
+				return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-t_helper	*param_init(t_helper *data, char **argv)
+void	*param_init(t_helper *data, char **argv)
 {
 	if (!param_check(argv))
 		exit_message("Invalid parameters", 1);
 	if (!param_atribution(data, argv))
 	{
-		free_param(data);
+		// printf("%lu time\n", data->time);
+		// printf("%d num philo\n", data->num_philo);
+		// printf("%d time to die\n", data->time_to_die);
+		// printf("%d time to eat\n", data->time_to_die);
+		// printf("%d time to sleep\n", data->time_to_die);
+		// printf("%d must eeat\n", data->num_philo_must_eat);
+		free(data);
 		exit_message("Invalid input for data", 1);
 	}
-	return (data);
+	return (0);
 }

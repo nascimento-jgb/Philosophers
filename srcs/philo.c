@@ -6,23 +6,22 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/01 14:09:15 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:15:02 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
-
-static void	free_philo(t_philo *philo, t_helper *data,
+void	free_philo(t_philo *philo, t_helper *data,
 		pthread_mutex_t *ini_mutex)
 {
 	if (philo)
 		free(philo);
 	if (data)
-		free_param(data);
+		free(data);
 	if (ini_mutex)
 		free(ini_mutex);
-	exit_message("initialization error", 1);
+	exit_message("end of program\n", 1);
 }
 
 static void	assign_philo(t_philo *philo, t_helper *data,
@@ -31,18 +30,18 @@ static void	assign_philo(t_philo *philo, t_helper *data,
 	int	i;
 
 	i = 0;
-	while (i < data->num_philosophers)
+	while (i < data->num_philo)
 	{
-		philo[i].got_food = 0;
-		philo[i].philo_id = i + 1;
+		philo[i].times_got_food = 0;
+		philo[i].id = i + 1;
 		philo[i].mutex = ini_mutex;
 		philo[i].print = ini_print;
-		philo[i].get_data = data;
+		philo[i].ref = data;
 		i++;
 	}
 }
 
-t_philo	*philo_init(t_philo *philo, t_helper *data)
+t_philo	*philo_init(t_helper *data, t_philo *philo)
 {
 	pthread_mutex_t	*ini_mutex;
 	pthread_mutex_t	ini_print;
@@ -50,10 +49,10 @@ t_philo	*philo_init(t_philo *philo, t_helper *data)
 
 	i = 0;
 	ini_mutex = (pthread_mutex_t *)malloc((sizeof(pthread_mutex_t))
-			* data->num_philosophers);
+			* data->num_philo);
 	if (!ini_mutex)
 		free_philo(philo, data, ini_mutex);
-	while (i < data->num_philosophers)
+	while (i < data->num_philo)
 		if (pthread_mutex_init(&ini_mutex[i++], NULL))
 			free_philo(philo, data, ini_mutex);
 	if (pthread_mutex_init(&ini_print, NULL))

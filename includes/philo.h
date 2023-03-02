@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 08:37:01 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/01 14:11:15 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 14:53:46 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 typedef struct s_helper
 {
-	int				num_philosophers;
-	int				num_forks;
+	int				num_philo;
+	int				completed_meals;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -33,31 +33,35 @@ typedef struct s_helper
 
 typedef struct s_philo
 {
-	int				got_food;
-	int				philo_id;
+	int				times_got_food;
+	int				id;
 	int				eat_count;
 	unsigned long	last_meal;
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	*print;
-	t_helper		*get_data;
+	t_helper		*ref;
 }	t_philo;
 
 // PARAMETERS
-t_helper		*param_init(t_helper *data, char **argv);
+void			*param_init(t_helper *data, char **argv);
 unsigned long	get_time(void);
-void			free_param(t_helper *data);
 
 //PHILO
-t_philo			*philo_init(t_philo *philo, t_helper *data);
+t_philo			*philo_init(t_helper *data, t_philo *philo);
+void			free_philo(t_philo *philo, t_helper *data,
+					pthread_mutex_t *ini_mutex);
 
 //ROUTINE
-void			threads_creation(pthread_t t_general, t_helper *data,
+void			threads_creation(pthread_t *t_general, t_helper *data,
 					t_philo *philo);
+void			*routine(void *routine);
+void			exec_routine(t_helper *data, t_philo *philo);
+void			print_msg(t_philo *philo, unsigned long time, char *action);
 
 // UTILS
+unsigned long	real_time(t_philo *philo);
 void			destroy_mutex(t_philo *philo);
 void			exit_message(char *str, int flag);
-void			free_param(t_helper *data);
 int				ft_atoi(char *str);
 int				ft_isdigit(int c);
 
