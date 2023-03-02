@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:54:20 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:31:48 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:54:15 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	*routine(void *routine)
 			philo->ref->completed_meals++;
 		usleep(philo->ref->time_to_eat * 1000);
 		philo->last_meal = get_time();
-		pthread_mutex_lock(&philo->mutex[philo->id - 1]);
-		pthread_mutex_lock(&philo->mutex[philo->id % philo->ref->num_philo]);
+		pthread_mutex_unlock(&philo->mutex[philo->id - 1]);
+		pthread_mutex_unlock(&philo->mutex[philo->id % philo->ref->num_philo]);
 		print_msg(philo, real_time(philo), "is sleeping.");
 		usleep(philo->ref->time_to_sleep * 1000);
 		print_msg(philo, real_time(philo), "is thinking.");

@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:15:02 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/02 15:42:15 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	free_philo(t_philo *philo, t_helper *data,
 		free(data);
 	if (ini_mutex)
 		free(ini_mutex);
-	exit_message("end of program\n", 1);
+	exit_message("end of program", 1);
 }
 
 static void	assign_philo(t_philo *philo, t_helper *data,
