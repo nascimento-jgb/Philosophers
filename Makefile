@@ -1,9 +1,9 @@
-NAME = philo
+NAME = philosophers
 CC = cc
 CFLAGS = -Werror -Wall -Wextra
-COMFILE_FLAGS = -g -pthread -fsanitize=address
+COMFILE_FLAGS = -g -pthread
 
-MAIN_SRCS =  $(addprefix srcs/, main.c parameters.c philo.c routine.c utils.c)
+MAIN_SRCS =  $(addprefix philo/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
 
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 

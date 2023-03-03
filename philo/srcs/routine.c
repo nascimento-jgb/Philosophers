@@ -6,16 +6,21 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:54:20 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:54:15 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:07:23 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 void	threads_creation(pthread_t *t_general, t_helper *data, t_philo *philo)
 {
 	int	i;
 
+	if (!t_general)
+	{
+		free(t_general);
+		exit_message("Allocation error", 1);
+	}
 	i = -1;
 	while (++i < data->num_philo)
 	{

@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:02:57 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:30:00 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:07:32 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 int	ft_atoi(char *str)
 {
@@ -36,10 +36,10 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-void	exit_message(char *str, int flag)
+int	exit_message(char *str, int flag)
 {
 	printf("%s\n", str);
-	exit(flag);
+	return (flag);
 }
 
 unsigned long	real_time(t_philo *philo)

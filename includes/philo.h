@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 08:37:01 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 14:53:46 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:07:31 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			print_msg(t_philo *philo, unsigned long time, char *action);
 // UTILS
 unsigned long	real_time(t_philo *philo);
 void			destroy_mutex(t_philo *philo);
-void			exit_message(char *str, int flag);
+int				exit_message(char *str, int flag);
 int				ft_atoi(char *str);
 int				ft_isdigit(int c);
 

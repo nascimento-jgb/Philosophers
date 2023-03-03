@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:42:15 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:07:20 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 void	free_philo(t_philo *philo, t_helper *data,
 		pthread_mutex_t *ini_mutex)
@@ -50,7 +50,7 @@ t_philo	*philo_init(t_helper *data, t_philo *philo)
 	i = 0;
 	ini_mutex = (pthread_mutex_t *)malloc((sizeof(pthread_mutex_t))
 			* data->num_philo);
-	if (!ini_mutex)
+	if (!ini_mutex || !philo)
 		free_philo(philo, data, ini_mutex);
 	while (i < data->num_philo)
 		if (pthread_mutex_init(&ini_mutex[i++], NULL))

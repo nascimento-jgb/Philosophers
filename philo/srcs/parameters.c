@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:16 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/02 15:42:14 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/03 11:07:18 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
 unsigned long	get_time(void)
 {
@@ -28,22 +28,12 @@ unsigned long	get_time(void)
 
 static int	param_atribution(t_helper *data, char **argv)
 {
-	printf("%s num philo\n", argv[1]);
-	printf("%s time to die\n", argv[2]);
-	printf("%s time to eat\n", argv[3]);
-	printf("%s time to sleep\n", argv[4]);
-	printf("%s must eat\n", argv[5]);
 	data->completed_meals = 0;
 	data->time = get_time();
 	data->num_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	printf("%lu time\n", data->time);
-	printf("%d num philo\n", data->num_philo);
-	printf("%d time to die\n", data->time_to_die);
-	printf("%d time to eat\n", data->time_to_eat);
-	printf("%d time to sleep\n", data->time_to_sleep);
 	if (data->num_philo < 1 || data->time_to_die < 1
 		|| data->time_to_eat < 1 || data->time_to_sleep < 1)
 		return (0);
@@ -78,16 +68,18 @@ static int	param_check(char **argv)
 
 void	*param_init(t_helper *data, char **argv)
 {
+	if (!data)
+	{
+		free(data);
+		exit_message("Allocation error", 1);
+	}
 	if (!param_check(argv))
+	{
+		free(data);
 		exit_message("Invalid parameters", 1);
+	}
 	if (!param_atribution(data, argv))
 	{
-		// printf("%lu time\n", data->time);
-		// printf("%d num philo\n", data->num_philo);
-		// printf("%d time to die\n", data->time_to_die);
-		// printf("%d time to eat\n", data->time_to_die);
-		// printf("%d time to sleep\n", data->time_to_die);
-		// printf("%d must eeat\n", data->num_philo_must_eat);
 		free(data);
 		exit_message("Invalid input for data", 1);
 	}
