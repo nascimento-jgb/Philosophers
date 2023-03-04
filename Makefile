@@ -1,7 +1,7 @@
-NAME = philo
-NAMEBONUS = philo_bonus
+NAME = philosopher
+NAMEBONUS = philo_b
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -I includes
+CFLAGS = -Werror -Wall -Wextra -I includes -fsanitize=address
 COMPILE_FLAGS = -g -pthread
 
 MAIN_SRCS =  $(addprefix philo/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
@@ -18,11 +18,10 @@ $(NAME) : $(MAIN_OBJS)
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(NAMEBONUS)
+
 $(NAMEBONUS) : $(BONUS_OBJS)
 	@$(CC) $(CFLAGS) $(COMPILE_FLAGS) $(BONUS_OBJS) -o $(NAMEBONUS)
-
-bonus: $(NAMEBONUS)
-	ar rus $(NAME) $(BONUS_OBJS:.c=.o)
 
 clean :
 	@rm -rf $(MAIN_OBJS) $(BONUS_OBJS)
