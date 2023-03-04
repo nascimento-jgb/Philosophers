@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:02:57 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/03 15:45:18 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:16:05 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,16 @@ unsigned long	get_time(void)
 	usec = (time.tv_usec / 1000);
 	total = sec + usec;
 	return (total);
+}
+
+void	philo_msg(t_helper *philo, char *str, int id)
+{
+	sem_wait(philo->ref->action)
+	if (!(philo->ref->death))
+	{
+		printf("%lums\t", get_time() - philo->ref->birth_time);
+		printf("philo %d ", id);
+		printf("%s\n", str);
+	}
+	sem_post(philo->ref->action);
 }

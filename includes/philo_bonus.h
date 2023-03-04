@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 08:37:01 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/03 15:42:55 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:16:06 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,11 @@ void			*param_init(t_philo *philo, char **argv);
 unsigned long	get_time(void);
 
 //PHILO
-
+void			*philo_processes(t_philo *philos, int i);
+void			philo_alive(t_helper *philo);
+void			philo_eat(t_helper *philo);
+void			philo_loop(long long time, t_philo *philo);
+void			*check_death(t_helper *philo);
 
 //ROUTINE
 void			*routine(t_philo *philo);
@@ -68,5 +72,6 @@ void			process_kill(t_philo *philo);
 int				ft_atoi(char *str);
 int				ft_isdigit(int c);
 unsigned long	get_time(void);
+void			philo_msg(t_helper *philo, char *str, int id);
 
 #endif

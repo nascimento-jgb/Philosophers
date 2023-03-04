@@ -6,30 +6,75 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/03 15:45:15 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/04 11:16:02 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo_bonus.h"
 
-void	check_death()
+void	*check_death(t_helper *philo)
+{
+	unsigned long	now;
 
-void	philo_sleep()
+	while (1)
+	{
+		now = get_time();
+		if (philo->got_food == philo->ref->num_philo_must_eat)
+			return (NULL);
+		if ((now - philo->last_meal)
+			>= (unsigned long long)philo->ref->time_to_die)
+		{
+			philo->death_flag = 1;
+			sem_wait(philo->ref->action);
+			printf("%lums\t philo %d died",
+				(now - philo->ref->bith_time), philo->id);
+			process_kill(philo_ref);
+			destroy_sem(philo->ref)
+			free(philo->ref->pid);
+			exit(1);
+		}
+		usleep(100);
+	}
+	return (NULL);
+}
 
+void	philo_loop(long long time, t_philo *philo)
+{
+	long long	i;
 
-void	philo_eat()
+	i = get_time();
+	while (!(philo->death))
+	{
+		if (get_time() - i >= time)
+			break ;
+		usleep(50);
+	}
+}
+
+void	philo_eat(t_helper *philo)
+{
+	sem_wait(philo->ref->fork);
+	philo_msg(philo, "has taken a fork", philo->id);
+	sem_wait(philo->ref->fork);
+	philo_msg(philo, "has taken a fork", philo->id);
+	philo_msg(philo, "is eating", philo->id);
+	philo_loop(philo->ref->time_to_eat, philo->ref);
+	philo->last_meal = get_time();
+	sem_post(philo->ref->fork);
+	sem_post(philo->ref->fork);
+	philo->got_food++;
+}
 
 void	philo_alive(t_helper *philo)
 {
-	while (!philo->death_flag &&
-			philo->got_food != philo->ref->num_philo_must_eat)
+	while (!philo->death_flag
+		&& philo->got_food != philo->ref->num_philo_must_eat)
 	{
 		philo_eat(philo);
-		philo_msg();
-		philo_sleep(philo->ref->time_to_sleep, philo->ref);
-		philo_msg();
+		philo_msg(philo, "is sleeping", philo->id);
+		philo_loop(philo->ref->time_to_sleep, philo->ref);
+		philo_msg(philo, "is thinking", philo->id);
 	}
-
 }
 
 void	*philo_processes(t_philo *philos, int i)
