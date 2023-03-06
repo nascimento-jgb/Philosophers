@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 08:37:01 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 12:24:50 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 09:46:47 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_philo
 	sem_t			*action;
 	t_helper		*ref;
 }	t_philo;
-
 
 // MAIN
 int				exit_message(char *str, int flag);

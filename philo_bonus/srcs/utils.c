@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:02:57 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 12:03:23 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:33:00 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "../includes/philo_bonus.h"
 
 int	ft_atoi(char *str)
 {
@@ -55,8 +55,8 @@ void	philo_msg(t_helper *philo, char *str, int id)
 	sem_wait(philo->ref->action);
 	if (!(philo->ref->death))
 	{
-		printf("%lums\t", get_time() - philo->ref->birth_time);
-		printf("philo %d ", id);
+		printf("%lu ", get_time() - philo->ref->birth_time);
+		printf("%d ", id);
 		printf("%s\n", str);
 	}
 	sem_post(philo->ref->action);

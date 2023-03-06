@@ -6,12 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:16 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 11:18:16 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:18:25 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
-
+#include "../includes/philo_bonus.h"
 
 static int	init_semaphores(t_philo *philo)
 {

@@ -1,11 +1,11 @@
-NAME = philosopher
-NAMEBONUS = philo_b
+NAME = philo
+NAMEBONUS = philo_bonus
 CC = cc
-CFLAGS = -Werror -Wall -Wextra -I includes -fsanitize=address
-COMPILE_FLAGS = -g -pthread
+CFLAGS = -Werror -Wall -Wextra -I includes
+COMPILE_FLAGS = -pthread
 
-MAIN_SRCS =  $(addprefix philo/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
-BONUS_SRCS = $(addprefix philo_bonus/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
+MAIN_SRCS =  $(addprefix /Users/jonascim/Desktop/git_folders/Philosophers/philo/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
+BONUS_SRCS = $(addprefix /Users/jonascim/Desktop/git_folders/Philosophers/philo_bonus/srcs/, main.c parameters.c philosophers.c routine.c utils.c)
 
 MAIN_OBJS = $(MAIN_SRCS:.c=.o)
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)

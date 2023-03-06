@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:54:20 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 14:20:11 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:18:17 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "../includes/philo_bonus.h"
 
 void	destroy_sem(t_philo *philo)
 {

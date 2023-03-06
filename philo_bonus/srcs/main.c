@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:22:24 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 12:24:58 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:18:26 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "../includes/philo_bonus.h"
 
 int	exit_message(char *str, int flag)
 {

@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/04 14:25:06 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:32:17 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo_bonus.h"
+#include "../includes/philo_bonus.h"
 
 void	*check_death(t_helper *philo)
 {
@@ -26,7 +26,7 @@ void	*check_death(t_helper *philo)
 		{
 			philo->death_flag = 1;
 			sem_wait(philo->ref->action);
-			printf("%lums   philo %d died\n",
+			printf("%lu %d died\n",
 				(now - philo->ref->birth_time), philo->id);
 			process_kill(philo->ref);
 			destroy_sem(philo->ref);

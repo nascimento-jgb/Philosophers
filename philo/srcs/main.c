@@ -6,11 +6,11 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 16:22:24 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/03 14:18:34 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/06 08:21:02 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../includes/philo.h"
 
 int	main(int argc, char **argv)
 {
