@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:02:57 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:17:42 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 08:41:40 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	ft_atoi(char *str)
 {
 	long	res;
-	int		sign;
 
-	sign = 1;
 	res = 0;
 	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '-' || *str == '+')
-		if (*str++ == '-')
-			sign = -1;
+	if (*str < '0' || *str > '9')
+		return (-1);
 	while (*str >= '0' && *str <= '9')
 		res = (res * 10) + *str++ - '0';
-	return (res * sign);
+	if (*str)
+		return (-1);
+	return (res);
 }
 
-int	ft_isdigit(int c)
+void	aux_ft_usleep(int time, int num_philos)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	if (num_philos >= 150)
+		ft_usleep(time);
+	else
+		usleep(time);
 }
 
 int	exit_message(char *str, int flag)

@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:16 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:18:25 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:19:24 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static int	param_atribution(t_philo *philo, char **argv)
 	philo->death = 0;
 	philo->birth_time = get_time();
 	if (philo->num_philos < 1 || philo->time_to_die < 1
-		|| philo->time_to_eat < 1 || philo->time_to_sleep < 1)
+		|| philo->time_to_eat < 0 || philo->time_to_sleep < 0)
 		return (0);
 	if (argv[5])
 	{
 		philo->num_philo_must_eat = ft_atoi(argv[5]);
-		if (philo->num_philo_must_eat < 1)
+		if (philo->num_philo_must_eat <= 0)
 			return (0);
 	}
 	else
@@ -50,31 +50,9 @@ static int	param_atribution(t_philo *philo, char **argv)
 	return (1);
 }
 
-static int	param_check(char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-			if (ft_isdigit(argv[i][j++]))
-				return (1);
-		i++;
-	}
-	return (0);
-}
-
 void	*param_init(t_philo *philo, char **argv)
 {
-	if (!param_check(argv))
-		exit_message("Invalid parameters", 1);
 	if (!param_atribution(philo, argv))
-	{
-		free(philo);
 		exit_message("Invalid input for data", 1);
-	}
 	return (0);
 }

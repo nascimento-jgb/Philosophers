@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:32:17 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 10:22:05 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ void	*check_death(t_helper *philo)
 		{
 			philo->death_flag = 1;
 			sem_wait(philo->ref->action);
-			printf("%lu %d died\n",
+			printf("%lu %d died \n",
 				(now - philo->ref->birth_time), philo->id);
 			process_kill(philo->ref);
 			destroy_sem(philo->ref);
 			free(philo->ref->pid);
 			exit(1);
 		}
-		usleep(100);
+		ft_usleep(100, philo->ref->num_philos);
 	}
 	return (NULL);
 }
@@ -47,7 +47,7 @@ void	philo_loop(long long time, t_philo *philo)
 	{
 		if ((long long)get_time() - i >= time)
 			break ;
-		usleep(50);
+		ft_usleep(50, philo->num_philos);
 	}
 }
 

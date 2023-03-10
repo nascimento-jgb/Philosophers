@@ -6,13 +6,13 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:24:08 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:17:45 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 07:59:43 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	free_philo(t_philo *philo, t_helper *data,
+int	free_philo(t_philo *philo, t_helper *data,
 		pthread_mutex_t *ini_mutex)
 {
 	if (philo)
@@ -21,7 +21,7 @@ void	free_philo(t_philo *philo, t_helper *data,
 		free(data);
 	if (ini_mutex)
 		free(ini_mutex);
-	exit_message("end of program", 1);
+	return (1);
 }
 
 static void	assign_philo(t_philo *philo, t_helper *data,
@@ -41,7 +41,7 @@ static void	assign_philo(t_philo *philo, t_helper *data,
 	}
 }
 
-t_philo	*philo_init(t_helper *data, t_philo *philo)
+int	philo_init(t_helper *data, t_philo *philo)
 {
 	pthread_mutex_t	*ini_mutex;
 	pthread_mutex_t	ini_print;
@@ -51,12 +51,12 @@ t_philo	*philo_init(t_helper *data, t_philo *philo)
 	ini_mutex = (pthread_mutex_t *)malloc((sizeof(pthread_mutex_t))
 			* data->num_philo);
 	if (!ini_mutex || !philo)
-		free_philo(philo, data, ini_mutex);
+		return (free_philo(philo, data, ini_mutex));
 	while (i < data->num_philo)
 		if (pthread_mutex_init(&ini_mutex[i++], NULL))
-			free_philo(philo, data, ini_mutex);
+			return (free_philo(philo, data, ini_mutex));
 	if (pthread_mutex_init(&ini_print, NULL))
-		free_philo(philo, data, ini_mutex);
+		return (free_philo(philo, data, ini_mutex));
 	assign_philo(philo, data, ini_mutex, &ini_print);
-	return (philo);
+	return (0);
 }

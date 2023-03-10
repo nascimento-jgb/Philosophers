@@ -6,11 +6,20 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:54:20 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:29:02 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 08:40:29 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	ft_usleep(int time)
+{
+	unsigned long	loop;
+
+	loop = get_time() + (unsigned long)time;
+	while (get_time() < loop)
+		usleep(500);
+}
 
 void	threads_creation(pthread_t *t_general, t_helper *data, t_philo *philo)
 {
@@ -59,7 +68,7 @@ void	exec_routine(t_helper *data, t_philo *philo)
 			return ;
 		}
 		j = (j + 1) % data->num_philo;
-		usleep(500);
+		aux_ft_usleep(500, philo->ref->num_philo);
 	}
 }
 
@@ -81,12 +90,12 @@ void	*routine(void *routine)
 		philo->times_got_food++;
 		if (philo->times_got_food == philo->ref->num_philo_must_eat)
 			philo->ref->completed_meals++;
-		usleep(philo->ref->time_to_eat * 1000);
+		ft_usleep(philo->ref->time_to_eat);
 		philo->last_meal = get_time();
 		pthread_mutex_unlock(&philo->mutex[philo->id - 1]);
 		pthread_mutex_unlock(&philo->mutex[philo->id % philo->ref->num_philo]);
 		print_msg(philo, real_time(philo), "is sleeping");
-		usleep(philo->ref->time_to_sleep * 1000);
+		ft_usleep(philo->ref->time_to_sleep);
 		print_msg(philo, real_time(philo), "is thinking");
 	}
 	return (0);

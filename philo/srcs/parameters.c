@@ -6,11 +6,39 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:06:16 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 08:17:47 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 07:59:44 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+static int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
+}
+
+static int	param_check(char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
 
 unsigned long	get_time(void)
 {
@@ -26,56 +54,28 @@ unsigned long	get_time(void)
 	return (total);
 }
 
-static int	param_atribution(t_helper *data, char **argv)
+int	param_atribution(t_helper *data, char **argv)
 {
+	if (!data)
+		return (0);
+	if (param_check(argv))
+		return (0);
 	data->completed_meals = 0;
 	data->time = get_time();
 	data->num_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
 	data->time_to_eat = ft_atoi(argv[3]);
 	data->time_to_sleep = ft_atoi(argv[4]);
-	if (data->num_philo < 1 || data->time_to_die < 1
-		|| data->time_to_eat < 1 || data->time_to_sleep < 1)
+	if (data->num_philo <= 0 || data->time_to_die <= 0
+		|| data->time_to_eat <= 0 || data->time_to_sleep <= 0)
 		return (0);
 	if (argv[5])
 	{
 		data->num_philo_must_eat = ft_atoi(argv[5]);
-		if (data->num_philo_must_eat < 1)
+		if (data->num_philo_must_eat <= 0)
 			return (0);
 	}
 	else
 		data->num_philo_must_eat = -1;
 	return (1);
-}
-
-static int	param_check(char **argv)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (argv[i])
-	{
-		j = 0;
-		while (argv[i][j])
-			if (ft_isdigit(argv[i][j++]))
-				return (1);
-		i++;
-	}
-	return (0);
-}
-
-void	*param_init(t_helper *data, char **argv)
-{
-	if (!param_check(argv))
-	{
-		free(data);
-		exit_message("Invalid parameters", 1);
-	}
-	if (!param_atribution(data, argv))
-	{
-		free(data);
-		exit_message("Invalid input for data", 1);
-	}
-	return (0);
 }

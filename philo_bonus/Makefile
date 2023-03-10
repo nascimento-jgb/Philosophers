@@ -6,11 +6,11 @@
 #    By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/06 15:21:59 by jonascim          #+#    #+#              #
-#    Updated: 2023/03/09 14:36:29 by jonascim         ###   ########.fr        #
+#    Updated: 2023/03/09 14:36:26 by jonascim         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philo_bonus
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror

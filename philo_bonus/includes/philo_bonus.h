@@ -6,7 +6,7 @@
 /*   By: jonascim <jonascim@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 08:37:01 by jonascim          #+#    #+#             */
-/*   Updated: 2023/03/06 09:46:47 by jonascim         ###   ########.fr       */
+/*   Updated: 2023/03/10 09:19:36 by jonascim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int				ft_atoi(char *str);
 int				ft_isdigit(int c);
 unsigned long	get_time(void);
 void			philo_msg(t_helper *philo, char *str, int id);
+void			ft_usleep(int time, int num_philos);
 
 #endif
